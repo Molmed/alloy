@@ -1,4 +1,4 @@
-# ALLoy
+# ALLoy :first_quarter_moon:
 
 ## About
 ALLoy is a user-friendly web application that allows the rapid subtyping of ALL patients using ALLIUM.
