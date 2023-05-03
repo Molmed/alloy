@@ -18,6 +18,9 @@ Activate: `conda activate alloy`
 
 Update (after changes to environment.yml): `conda env update --file environment.yml --prune`
 
+## Configure app
+Copy `.env.example` to `.env` and configure the latter with your own settings.
+
 ## Run
 `python manage.py runserver`
 
