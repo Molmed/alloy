@@ -127,4 +127,6 @@ PASSWORDLESS_AUTH = {
    'PASSWORDLESS_EMAIL_NOREPLY_ADDRESS': 'noreply@alloy.se'
 }
 
-EMAIL_BACKEND = env.str('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
+EMAIL_BACKEND = env.str('EMAIL_BACKEND', default='sendgrid_backend.SendgridBackend')
+SENDGRID_API_KEY = env.str('SENDGRID_API_KEY')
+SENDGRID_SANDBOX_MODE_IN_DEBUG=env.bool('SENDGRID_SANDBOX_MODE_IN_DEBUG', default=True)

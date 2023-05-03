@@ -8,4 +8,4 @@ dependencies:
     - django==4.2
     - drfpasswordless==1.5.8
     - django-environ==0.10.0
-
+    - django-sendgrid-v5==1.2.2
