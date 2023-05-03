@@ -1,0 +1,9 @@
+name: alloy
+channels:
+  - defaults
+dependencies:
+  - python=3.11
+  - pip=23.0.1
+  - pip:
+    - django==4.2
+
