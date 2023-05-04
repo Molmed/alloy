@@ -128,5 +128,5 @@ PASSWORDLESS_AUTH = {
 }
 
 EMAIL_BACKEND = env.str('EMAIL_BACKEND', default='sendgrid_backend.SendgridBackend')
-SENDGRID_API_KEY = env.str('SENDGRID_API_KEY')
+SENDGRID_API_KEY = env.str('SENDGRID_API_KEY', default='')
 SENDGRID_SANDBOX_MODE_IN_DEBUG=env.bool('SENDGRID_SANDBOX_MODE_IN_DEBUG', default=True)
