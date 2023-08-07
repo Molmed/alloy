@@ -34,15 +34,14 @@ SECRET_KEY = env.str('SECRET_KEY')
 
 # Application definition
 INSTALLED_APPS = [
+    'predictions.apps.PredictionsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'rest_framework.authtoken',
-    'drfpasswordless'
+    'bootstrap5'
 ]
 
 MIDDLEWARE = [
@@ -99,7 +98,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Stockholm'
 
 USE_I18N = True
 
