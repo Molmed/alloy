@@ -116,17 +116,3 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Passwordless config
-REST_FRAMEWORK = {
-     'DEFAULT_AUTHENTICATION_CLASSES':
-    ('rest_framework.authentication.TokenAuthentication',
- )}
-
-PASSWORDLESS_AUTH = {
-   'PASSWORDLESS_AUTH_TYPES': ['EMAIL'],
-   'PASSWORDLESS_EMAIL_NOREPLY_ADDRESS': 'noreply@alloy.se'
-}
-
-EMAIL_BACKEND = env.str('EMAIL_BACKEND', default='sendgrid_backend.SendgridBackend')
-SENDGRID_API_KEY = env.str('SENDGRID_API_KEY', default='')
-SENDGRID_SANDBOX_MODE_IN_DEBUG=env.bool('SENDGRID_SANDBOX_MODE_IN_DEBUG', default=True)
