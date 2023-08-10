@@ -1,3 +1,4 @@
+{% load django_htmx %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,8 +6,14 @@
   {% load bootstrap5 %}
   {% bootstrap_css %}
   {% bootstrap_javascript %}
+  {% load static %}
+  <script src="{% static 'htmx/htmx.min.js' %}" defer></script>
+  <script src="{% static 'htmx/ext/debug.js' %}" defer></script>
+  <script src="{% static 'htmx/ext/event-header.js' %}" defer></script>
+  {% django_htmx_script %}
+  <link rel="stylesheet" href="{% static 'predictions/style.css' %}">
 </head>
-<body>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 <div class="container">
   <ul class="nav bg-info">
     <li class="nav-item">
@@ -16,6 +23,23 @@
       <a class="nav-link link-light" href="/about">ABOUT</a>
     </li>
   </ul>
+
+<form id='form' hx-encoding='multipart/form-data' hx-post='/predictions/upload/'>
+  <input type='file' name='file'>
+  <button>
+      Upload
+  </button>
+  <progress id='progress' value='0' max='100'></progress>
+</form>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    htmx.on('#form', 'htmx:xhr:progress', function(evt) {
+    htmx.find('#progress').setAttribute('value', evt.detail.loaded/evt.detail.total * 100)
+  });
+    });
+  
+</script>
+
 
   {% block content %}
   {% endblock %}
