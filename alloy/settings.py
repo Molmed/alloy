@@ -122,3 +122,26 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 INTERNAL_IPS = [
     "127.0.0.1"
 ]
+
+# Adjust the log level as needed (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+LOGGING_LEVEL = 'INFO'
+LOGGING_DIR = env.str('LOGGING_DIR')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': LOGGING_LEVEL,
+            'class': 'logging.FileHandler',
+            'filename': f'{LOGGING_DIR}/django.log',  # Path to the log file
+        },
+    },
+    'loggers': {
+        'predictions': {
+            'handlers': ['file'],
+            'level': LOGGING_LEVEL,
+            'propagate': True,
+        },
+    },
+}
