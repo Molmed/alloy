@@ -97,23 +97,56 @@
     
     <div class="b-example-divider b-example-vr"></div>
     
-    <form id='form' hx-encoding='multipart/form-data' hx-post='/predictions/upload/'>
-      GEX: <input type='file' name='gex'>
-      Phenotype: <input type='file' name='phenotype'>
-      <button>
-        Upload
-      </button>
-      <progress id='progress' value='0' max='100'></progress>
-    </form>
-    
-    
+    <div class="d-flex flex-column p-3">
+      <div class="card scrollarea">
+        <div class="card-header">
+          Gene Expression Analysis
+        </div>
+      
+        <div class="card-body">
+          <form id='form' hx-encoding='multipart/form-data' hx-post='/predictions/upload/'>
+            <div id="input-fields" class="clearfix">
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="fgex">GEX</label>
+                <input type='file' class="form-control" name='gex' id='fgex'>
+              </div>
+      
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="fphenotype">Phenotype</label>
+                <input type='file' class="form-control" name='phenotype' id="fphenotype">
+              </div>
+              
+              <button class="btn btn-primary float-end">
+                Upload
+              </button>
+            </div>
+            
+          </form>
+
+          <div id="loading" class="text-center d-none">
+            <div class="spinner-border text-secondary p-3" id="spinner" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <h5 class="p-3 align-self-center">Uploading</h5>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
   
   
   <script>
     document.addEventListener("DOMContentLoaded", function() {
       htmx.on('#form', 'htmx:xhr:progress', function(evt) {
-        htmx.find('#progress').setAttribute('value', evt.detail.loaded/evt.detail.total * 100)
+        form = document.getElementById('input-fields');
+        form.classList.add('d-none');
+        spinner = document.getElementById('loading');
+        spinner.classList.remove('d-none');
+      });
+
+      htmx.on('#form', 'htmx:xhr:loadend', function(evt) {
+        spinner = document.getElementById('loading');
+        spinner.classList.add('d-none');
       });
     });
     

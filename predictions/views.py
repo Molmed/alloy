@@ -44,11 +44,11 @@ def upload(request):
         # Post JSON data to API endpoint
         response = requests.post(api_endpoint, json={'gex': gex, "pheno": phenotype})
 
-        if response.status_code == 201: 
+        if response.status_code == 200: 
             response_json = json.loads(response.json())
             result = json.loads(response_json['result'])
             inference_df = pd.DataFrame.from_dict(result)
-            return HttpResponse(inference_df.to_html(classes='table'))
+            return HttpResponse(inference_df.transpose().to_html(classes='table'))
         else:
             error = "Inference API returned error: %s."
             return HttpResponse(error % response.status_code)
