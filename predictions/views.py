@@ -1,6 +1,7 @@
 import pandas as pd
 import requests
 import logging
+import json
 from io import StringIO
 from django.http import JsonResponse
 from django.http import HttpResponse
@@ -40,13 +41,18 @@ def upload(request):
 
         # Post JSON data to API endpoint
         response = requests.post(api_endpoint, json={'gex': csv_data.to_json(orient='index'), "pheno": pheno.to_json(orient='index')})
-
-        logger.info('API Response: %s', response.content)
-
         
+        inference = json.loads(response.json())
+        result = json.loads(inference['result'])
+
+        logger.info('API Response: %s', result)
+        logger.info(type(inference))
+
+        inference_df = pd.DataFrame.from_dict(result)
+
         #if response.status_code == 201:  # Assuming API responds with 201 Created
         #    return JsonResponse({'message': 'CSV data converted and posted successfully'}, status=201)
         #else:
         #    return JsonResponse({'error': 'Failed to post JSON data to the API'}, status=response.status_code)
 
-        return HttpResponse(response.status_code)
+        return HttpResponse(inference_df.to_html(classes='table'))
