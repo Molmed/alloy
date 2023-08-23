@@ -24,35 +24,33 @@ def detail(request, prediction_id):
     response = "You're looking at the results of prediction %s."
     return HttpResponse(response % prediction_id)
 
+def process_uploaded_file(data, index_col):
+    content = data.read().decode('utf-8')
+    csv = pd.read_csv(StringIO(content), index_col=index_col)
+    return csv.to_json(orient='index')
+
 @require_POST
 def upload(request):
-    if request.method == 'POST' and request.FILES.get('file'):
-        uploaded_file = request.FILES['file']
-        file_size = uploaded_file.size
-
-        # Read CSV and convert to JSON
-        # TODO: validation
-        uploaded_content = uploaded_file.read().decode('utf-8')
-        csv_data = pd.read_csv(StringIO(uploaded_content), index_col="public_id")
-        pheno = pd.read_csv('/home/mariya/Development/allium/data/test_data/gex/pheno.csv', index_col="Sample SJ ID")
+    if request.method == 'POST' and \
+        request.FILES.get('gex') and \
+            request.FILES.get('phenotype'):
+        
+        gex = process_uploaded_file(request.FILES['gex'], index_col="public_id")
+        phenotype = process_uploaded_file(request.FILES['phenotype'], index_col="Sample SJ ID")
 
         # Define API endpoint URL
         api_endpoint = 'https://allium.serve.scilifelab.se/predict/'
 
         # Post JSON data to API endpoint
-        response = requests.post(api_endpoint, json={'gex': csv_data.to_json(orient='index'), "pheno": pheno.to_json(orient='index')})
+        response = requests.post(api_endpoint, json={'gex': gex, "pheno": phenotype})
+
+        if response.status_code == 201: 
+            response_json = json.loads(response.json())
+            result = json.loads(response_json['result'])
+            inference_df = pd.DataFrame.from_dict(result)
+            return HttpResponse(inference_df.to_html(classes='table'))
+        else:
+            error = "Inference API returned error: %s."
+            return HttpResponse(error % response.status_code)
+
         
-        inference = json.loads(response.json())
-        result = json.loads(inference['result'])
-
-        logger.info('API Response: %s', result)
-        logger.info(type(inference))
-
-        inference_df = pd.DataFrame.from_dict(result)
-
-        #if response.status_code == 201:  # Assuming API responds with 201 Created
-        #    return JsonResponse({'message': 'CSV data converted and posted successfully'}, status=201)
-        #else:
-        #    return JsonResponse({'error': 'Failed to post JSON data to the API'}, status=response.status_code)
-
-        return HttpResponse(inference_df.to_html(classes='table'))
