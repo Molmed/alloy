@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container m-3 p-3">
+	<h1 class="mb-3">Frequently Asked Questions</h1>
+	<div class="accordion accordion-flush" id="faq">
+		<div class="accordion-item">
+		<h2 class="accordion-header">
+			<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWhat" aria-expanded="true" aria-controls="collapseWhat">
+				What is ALLoy?
+			</button>
+		</h2>
+		<div id="collapseWhat" class="accordion-collapse collapse show" data-bs-parent="#faq">
+			<div class="accordion-body">
+				<strong>ALLoy allows the rapid subtyping of Acute Lymphoblastic Leukemia (ALL) patients using ALLIUM. </strong>
+				ALLIUM (ALL subtype Identification Using Machine learning) is a multimodal classifier of molecular subtypes in pediatric acute lymphoblastic leukemia, using DNA methylation (DNAm) and gene expression (GEX) data.
+			</div>
+		</div>
+		</div>
+
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHow" aria-expanded="false" aria-controls="collapseHow">
+				How does ALLoy work?
+				</button>
+			</h2>
+			<div id="collapseHow" class="accordion-collapse collapse" data-bs-parent="#faq">
+				<div class="accordion-body">
+					ALLoy is a Django web application that interfaces with an MLflow server running the ALLIUM model. When you upload a gene expression (GEX) file paired with a phenotype information file, this data is posted to the ALLIUM model’s inference function. The results, a set of probabilities that a particular patient belongs to the given ALL subtypes, are displayed in a formatted report. DNA methylation (DNAm) is currently being implemented, and works in a similar manner.
+				</div>
+			</div>
+		</div>
+
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFormat" aria-expanded="false" aria-controls="collapseFormat">
+				How should I format my input files for ALLoy? 
+				</button>
+			</h2>
+			<div id="collapseFormat" class="accordion-collapse collapse" data-bs-parent="#faq">
+				<div class="accordion-body">
+				Download our <a href="#">example GEX file</a> and <a href="#">example phenotype file</a>.
+				</div>
+			</div>
+		</div>
+
+		<div class="accordion-item">
+		<h2 class="accordion-header">
+			<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAbout" aria-expanded="false" aria-controls="collapseAbout">
+			Where can I read more about ALLoy?
+			</button>
+		</h2>
+		<div id="collapseAbout" class="accordion-collapse collapse" data-bs-parent="#faq">
+			<div class="accordion-body">
+				Read more about ALLoy on our <a href="/about">About page</a>, or delve into the details of the ALLIUM model in <a href="https://www.medrxiv.org/content/10.1101/2023.03.24.23287613v1">our paper</a>.
+			</div>
+		</div>
+		</div>
+		<div class="accordion-item">
+		<h2 class="accordion-header">
+			<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+			Can ALLoy be used in a clinical setting?
+			</button>
+		</h2>
+		<div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faq">
+			<div class="accordion-body">
+			<strong>No.</strong> ALLoy is limited to academic research use only.
+			</div>
+		</div>
+		</div>
+
+		<div class="accordion-item">
+			<h2 class="accordion-header">
+				<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseName" aria-expanded="false" aria-controls="collapseName">
+					What's the name all about?
+				</button>
+			</h2>
+			<div id="collapseName" class="accordion-collapse collapse" data-bs-parent="#faq">
+				<div class="accordion-body">
+					Oxford Languages defines <i>alloy</i> thus:<br />
+					<code>
+					/ˈalɔɪ/
+					a metal made by combining two or more metallic elements, especially to give greater strength<br /><br />
+					</code>
+					By combining GEX and DNAm data, our "alloy" improves the predictive power of machine learning to subtype ALL patients.					
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+{% endblock %}
