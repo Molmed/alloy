@@ -16,8 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from predictions import views
+from django.urls import re_path
+from django.views.generic.base import RedirectView
 
 urlpatterns = [
+    re_path(r'^favicon\.ico$', RedirectView.as_view(url='/static/images/favicon.png', permanent=True)),
+    path('', views.homepage, name='homepage'),
     path("__debug__/", include("debug_toolbar.urls")),
     path("predictions/", include("predictions.urls")),
     path('admin/', admin.site.urls),
