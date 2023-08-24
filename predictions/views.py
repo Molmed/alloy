@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def index(request):
     latest_predictions_list = Prediction.objects.order_by("-created_at")[:5]
-    template = loader.get_template("predictions/index.html")
+    template = loader.get_template("gex.html")
     context = {
         "latest_predictions_list": latest_predictions_list,
     }
