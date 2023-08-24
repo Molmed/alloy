@@ -24,6 +24,6 @@ urlpatterns = [
     re_path(r'^favicon\.ico$', RedirectView.as_view(url='/static/images/favicon.png', permanent=True)),
     path('', views.homepage, name='homepage'),
     path("__debug__/", include("debug_toolbar.urls")),
-    path("predictions/", include("predictions.urls")),
+    path("analysis/", include("predictions.urls")),
     path('admin/', admin.site.urls),
 ]
