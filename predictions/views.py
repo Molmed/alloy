@@ -20,6 +20,10 @@ def faq(request):
     template = loader.get_template("faq.html")
     return HttpResponse(template.render({}, request))
 
+def about(request):
+    template = loader.get_template("about.html")
+    return HttpResponse(template.render({}, request))
+
 def index(request):
     latest_predictions_list = Prediction.objects.order_by("-created_at")[:5]
     template = loader.get_template("gex.html")

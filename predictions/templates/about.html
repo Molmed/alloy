@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}About ALLoy{% endblock %}
+
+{% block content %}
+<div class="container m-3 p-3">
+	<h1 class="mb-3">About</h1>
+	<h2>ALL Subtypes</h2>
+	<p>
+		Acute lymphoblastic leukemia (ALL) is the most common childhood malignancy, accounting for up to 80% of pediatric leukemia cases in Europe. ALL is a highly heterogeneous disease with multiple subtypes, marked by a wide variety of chromosomal aberrations. These subtypes hold prognostic value and contribute to clinical decision-making with regards to tailoring patient treatment. However, up to 27% of patients have had an unknown subtype at the time of diagnosis, lacking chromosomal features that can be detected using conventional techniques such as PCR, FISH, or g-banding. Although next-generation sequencing and RNA-sequencing are increasingly used as diagnostic tools, difficulties in subtyping certain patients remain.</p>
+	<h2>ALLIUM and ALLoy</h2>	
+	<p> In order to address this problem, we built a machine learning model, <a href="https://www.medrxiv.org/content/10.1101/2023.03.24.23287613v1">ALLIUM</a>, that uses associations between transcriptomic and epigenomic footprints and subtype-defining aberrations to resolve up to 85% of cases whose subtype was previously unknown. Herein, we present ALLoy, a user-friendly web application that allows the rapid subtyping of ALL patients using ALLIUM. ALLoy works in tandem with add-on pipelines for preprocessing genomics data, including batch correction and normalization. After uploading and data pre-processing, a report with per-subtype probabilities and visualizations is returned, together with a confidence score and an overall subtype prediction. ALLoy allows researchers and clinicians without domain-specific knowledge in computing to harness the power of machine learning to improve their ALL diagnostic procedures and streamline patient subtyping.
+
+	</p>
+</div>
+{% endblock %}
