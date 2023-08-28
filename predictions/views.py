@@ -24,6 +24,10 @@ def about(request):
     template = loader.get_template("about.html")
     return HttpResponse(template.render({}, request))
 
+def team(request):
+    template = loader.get_template("team.html")
+    return HttpResponse(template.render({}, request))
+
 def index(request):
     latest_predictions_list = Prediction.objects.order_by("-created_at")[:5]
     template = loader.get_template("gex.html")

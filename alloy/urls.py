@@ -25,6 +25,7 @@ urlpatterns = [
     path('', views.homepage, name='homepage'),
     path('faq/', views.faq, name='faq'),
     path('about/', views.about, name='about'),
+    path('team/', views.team, name='team'),
     path("__debug__/", include("debug_toolbar.urls")),
     path("analysis/", include("predictions.urls")),
     path('admin/', admin.site.urls),
