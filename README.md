@@ -5,8 +5,8 @@ ALLoy is a user-friendly web application that allows the rapid subtyping of ALL 
 
 [ALLIUM](https://github.com/Molmed/allium) (ALL subtype Identification Using Machine learning) is a multimodal classifier of molecular subtypes in pediatric acute lymphoblastic leukemia, using DNA methylation (DNAm) and gene expression (GEX) data.
 
-## Pre-requisites
-Docker. Alternatively, Python 3.11+ and Conda.
+## Running ALLoy
+ALLoy can be run using either Docker, or Python 3.11+ and Conda. Follow the relevant instructions below, then access the application at: http://localhost:8000/
 
 ## Running with Docker
 ```
